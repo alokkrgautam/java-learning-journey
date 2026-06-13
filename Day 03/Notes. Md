@@ -1,1 +1,521 @@
+# ☕ Java — Day 03 Notes
 
+**Source:** Coder Army | Aditya Tandon Sir
+**Topic:** Variables, Data Types, Comments, Literals
+
+---
+
+## Pehle Ye Socho — Data Store Kahan Hota Hai?
+
+Jab bhi hum program mein kuch value use karte hain — jaise kisi ka age, name, marks — toh wo **memory mein store** hoti hai।
+
+Par memory ko kaise batayenge ki **kitni jagah chahiye** aur **kis type ka data** store hoga?
+
+Yehi kaam karta hai — **Variable + Data Type** ka combination! 🎯
+
+---
+
+## Variable Kya Hai?
+
+Variable = **memory ka ek named box** jisme data store hota hai।
+
+```java
+int age = 20;
+```
+
+Iska matlab:
+- `int` → box ka type (integer number store hoga)
+- `age` → box ka naam
+- `20` → box mein rakha data
+
+**Kyun zaroori hai naam?**
+Taaki baad mein us data ko **naam se access** kar sako — memory address yaad nahi karna padta!
+
+---
+
+## Comment Kya Hota Hai?
+
+Comment = **code ke andar explanation** — jo Java compiler ignore karta hai।
+
+```java
+// Ye single line comment hai
+
+/* Ye
+   multi-line
+   comment hai */
+```
+
+**Kyun use karte hain?**
+- Code samjhane ke liye — apne future self ke liye bhi! 😄
+- Compiler inhe skip karta hai — program par koi effect nahi
+
+---
+
+## Literal Kya Hota Hai?
+
+Literal = **directly likhi hui fixed value** — jo variable mein store hoti hai।
+
+```java
+int age = 20;      // 20 ek literal hai
+float pi = 3.14f;  // 3.14f ek literal hai
+char c = 'A';      // 'A' ek literal hai
+```
+
+Simple shabdon mein — **jo value tune seedha likhi, wo literal hai!**
+
+---
+
+## Data Types — 4 Main Types
+
+Java mein data 4 tarah ka hota hai:
+
+```
+Data Types
+├── int     → whole numbers (1, 2, 100, -50)
+├── float   → decimal numbers (3.14, 9.8)
+├── char    → single character ('A', 'z', '9')
+└── boolean → true ya false sirf
+```
+
+Ab inhe **depth mein** samjhte hain 👇
+
+---
+
+## 1. Integer Types — 4 Types
+
+Poore numbers store karne ke liye — but **size alag alag** hota hai:
+
+| Type | Size | Range | Kab use karein |
+|------|------|-------|----------------|
+| **byte** | 1 byte | -128 to 127 | Bahut chhota number |
+| **short** | 2 bytes | -32,768 to 32,767 | Medium chhota |
+| **int** | 4 bytes | -2 billion to 2 billion | Default — mostly yehi use hota hai |
+| **long** | 8 bytes | Bahut bada number | Jab int se bada chahiye |
+
+```java
+byte b = 100;
+short s = 1000;
+int age = 20;         // sabse common
+long population = 8000000000L;  // L lagana zaroori!
+```
+
+**Kyun itne types?**
+Memory bachane ke liye! Agar chhota number store karna hai toh `int` kyun use karein — `byte` se kaam chalao। 💡
+
+---
+
+## 2. Float Types — 2 Types
+
+Decimal numbers ke liye:
+
+| Type | Size | Precision | Kab use karein |
+|------|------|-----------|----------------|
+| **float** | 4 bytes | Single precision (~7 digits) | Jab exact precision nahi chahiye |
+| **double** | 8 bytes | Double precision (~15 digits) | Jab zyada accuracy chahiye |
+
+```java
+float pi = 3.14f;        // f lagana zaroori!
+double salary = 99999.99; // default decimal type
+```
+
+**Single vs Double Precision — Kya Matlab?**
+- `float` = **7 decimal digits** tak accurate
+- `double` = **15 decimal digits** tak accurate
+
+Socho — scientific calculations mein agar 0.000001 ka bhi farak matter karta hai — toh `double` use karo!
+
+> **Default rule:** Java mein decimal number likhne par automatically `double` maana jaata hai — isliye float mein `f` lagana padta hai!
+
+---
+
+## 3. Char — C/C++ Se Alag Kyun?
+
+```java
+char c = 'A';
+```
+
+| | C/C++ | Java |
+|--|-------|------|
+| Size | 1 byte | **2 bytes** |
+| Encoding | ASCII | **Unicode (UTF-16)** |
+
+**Kyun Java ne 2 bytes rakha?**
+
+C/C++ mein `char` sirf **ASCII** support karta tha — matlab sirf English characters (A-Z, 0-9 etc.) — 128 characters total।
+
+But Java **international language** ke liye bana tha — Hindi, Chinese, Arabic, Japanese — sab support karna tha।
+
+Isliye Java ne **Unicode** adopt kiya — jisme **65,536 characters** fit hote hain! Aur itne characters ke liye **2 bytes** chahiye।
+
+```java
+char hindi = 'अ';   // Java mein possible hai!
+char c = 'A';
+```
+
+> **Key insight:** Ye Java ki global thinking hai — sirf English nahi, poori duniya ke characters support karo! 🌍
+
+---
+
+## 4. Boolean
+
+```java
+boolean isPass = true;
+boolean isRaining = false;
+```
+
+- Sirf **2 values** — `true` ya `false`
+- Conditions aur decisions ke liye use hota hai
+- Size technically 1 bit — but JVM internally 1 byte use karta hai
+
+---
+
+## Special Literals — Octal aur Hexadecimal
+
+Ye ek **interesting cheez** hai — numbers sirf decimal mein nahi likhe jaate!
+
+### Octal (Base 8) — `0` se shuru karo
+
+```java
+int octal = 0123;  // pehle 0 lagao
+```
+
+- `0` prefix = Java samjhega ye **octal number** hai
+- `0123` octal = `83` decimal
+
+**Kab use hota hai?** File permissions (Linux), low-level programming mein।
+
+### Hexadecimal (Base 16) — `0X` se shuru karo
+
+```java
+int hex = 0X1F;   // pehle 0X lagao
+```
+
+- `0X` prefix = Java samjhega ye **hexadecimal** hai
+- `0X1F` = `31` decimal
+- Digits: 0-9 aur A-F (A=10, B=11... F=15)
+
+**Kab use hota hai?** Colors (RGB codes), memory addresses, networking mein।
+
+```
+Normal:  int a = 255;     // decimal
+Octal:   int b = 0377;    // 0 se shuru
+Hexa:    int c = 0XFF;    // 0X se shuru
+// teeno same value store karte hain — 255!
+```
+
+---
+
+## Poora Picture Ek Saath
+
+```
+Java Data Types
+│
+├── int (4 types)
+│   ├── byte  → 1 byte
+│   ├── short → 2 bytes
+│   ├── int   → 4 bytes ← most common
+│   └── long  → 8 bytes
+│
+├── float (2 types)
+│   ├── float  → 4 bytes (single precision)
+│   └── double → 8 bytes (double precision) ← more accurate
+│
+├── char
+│   └── 2 bytes ← Unicode (C/C++ se alag!)
+│
+└── boolean
+    └── true / false only
+```
+
+---
+
+## Quick Revision Table
+
+| Sawaal | Jawab |
+|--------|-------|
+| Variable kya hai? | Named memory box |
+| Literal kya hai? | Directly likhi fixed value |
+| Comment compiler padhta hai? | Nahi — ignore karta hai |
+| Int ke kitne types? | 4 — byte, short, int, long |
+| Float ke kitne types? | 2 — float, double |
+| Char Java mein kitne bytes? | 2 bytes (Unicode) |
+| C/C++ mein char kitne bytes? | 1 byte (ASCII) |
+| Octal likhne ka prefix? | 0 (zero) |
+| Hex likhne ka prefix? | 0X |
+| Boolean ki values? | true / false |
+
+---
+
+## Ek Line Mein Poora Concept
+
+> **Data type batata hai — kitni memory chahiye aur kis type ka data — variable us memory ka naam hai — aur literal wo actual value hai jo usme store hoti hai!** 🔥
+
+---
+
+*Day 04 → Operators in Java* 🚀
+
+---
+
+GitHub update karo aur LinkedIn post chahiye toh bol do! 🔥Perfect! Enough hai — banata hoon! 👇
+
+---
+
+# ☕ Java — Day 03 Notes
+
+**Source:** Coder Army | Aditya Tandon Sir
+**Topic:** Variables, Data Types, Comments, Literals
+
+---
+
+## Pehle Ye Socho — Data Store Kahan Hota Hai?
+
+Jab bhi hum program mein kuch value use karte hain — jaise kisi ka age, name, marks — toh wo **memory mein store** hoti hai।
+
+Par memory ko kaise batayenge ki **kitni jagah chahiye** aur **kis type ka data** store hoga?
+
+Yehi kaam karta hai — **Variable + Data Type** ka combination! 🎯
+
+---
+
+## Variable Kya Hai?
+
+Variable = **memory ka ek named box** jisme data store hota hai।
+
+```java
+int age = 20;
+```
+
+Iska matlab:
+- `int` → box ka type (integer number store hoga)
+- `age` → box ka naam
+- `20` → box mein rakha data
+
+**Kyun zaroori hai naam?**
+Taaki baad mein us data ko **naam se access** kar sako — memory address yaad nahi karna padta!
+
+---
+
+## Comment Kya Hota Hai?
+
+Comment = **code ke andar explanation** — jo Java compiler ignore karta hai।
+
+```java
+// Ye single line comment hai
+
+/* Ye
+   multi-line
+   comment hai */
+```
+
+**Kyun use karte hain?**
+- Code samjhane ke liye — apne future self ke liye bhi! 😄
+- Compiler inhe skip karta hai — program par koi effect nahi
+
+---
+
+## Literal Kya Hota Hai?
+
+Literal = **directly likhi hui fixed value** — jo variable mein store hoti hai।
+
+```java
+int age = 20;      // 20 ek literal hai
+float pi = 3.14f;  // 3.14f ek literal hai
+char c = 'A';      // 'A' ek literal hai
+```
+
+Simple shabdon mein — **jo value tune seedha likhi, wo literal hai!**
+
+---
+
+## Data Types — 4 Main Types
+
+Java mein data 4 tarah ka hota hai:
+
+```
+Data Types
+├── int     → whole numbers (1, 2, 100, -50)
+├── float   → decimal numbers (3.14, 9.8)
+├── char    → single character ('A', 'z', '9')
+└── boolean → true ya false sirf
+```
+
+Ab inhe **depth mein** samjhte hain 👇
+
+---
+
+## 1. Integer Types — 4 Types
+
+Poore numbers store karne ke liye — but **size alag alag** hota hai:
+
+| Type | Size | Range | Kab use karein |
+|------|------|-------|----------------|
+| **byte** | 1 byte | -128 to 127 | Bahut chhota number |
+| **short** | 2 bytes | -32,768 to 32,767 | Medium chhota |
+| **int** | 4 bytes | -2 billion to 2 billion | Default — mostly yehi use hota hai |
+| **long** | 8 bytes | Bahut bada number | Jab int se bada chahiye |
+
+```java
+byte b = 100;
+short s = 1000;
+int age = 20;         // sabse common
+long population = 8000000000L;  // L lagana zaroori!
+```
+
+**Kyun itne types?**
+Memory bachane ke liye! Agar chhota number store karna hai toh `int` kyun use karein — `byte` se kaam chalao। 💡
+
+---
+
+## 2. Float Types — 2 Types
+
+Decimal numbers ke liye:
+
+| Type | Size | Precision | Kab use karein |
+|------|------|-----------|----------------|
+| **float** | 4 bytes | Single precision (~7 digits) | Jab exact precision nahi chahiye |
+| **double** | 8 bytes | Double precision (~15 digits) | Jab zyada accuracy chahiye |
+
+```java
+float pi = 3.14f;        // f lagana zaroori!
+double salary = 99999.99; // default decimal type
+```
+
+**Single vs Double Precision — Kya Matlab?**
+- `float` = **7 decimal digits** tak accurate
+- `double` = **15 decimal digits** tak accurate
+
+Socho — scientific calculations mein agar 0.000001 ka bhi farak matter karta hai — toh `double` use karo!
+
+> **Default rule:** Java mein decimal number likhne par automatically `double` maana jaata hai — isliye float mein `f` lagana padta hai!
+
+---
+
+## 3. Char — C/C++ Se Alag Kyun?
+
+```java
+char c = 'A';
+```
+
+| | C/C++ | Java |
+|--|-------|------|
+| Size | 1 byte | **2 bytes** |
+| Encoding | ASCII | **Unicode (UTF-16)** |
+
+**Kyun Java ne 2 bytes rakha?**
+
+C/C++ mein `char` sirf **ASCII** support karta tha — matlab sirf English characters (A-Z, 0-9 etc.) — 128 characters total।
+
+But Java **international language** ke liye bana tha — Hindi, Chinese, Arabic, Japanese — sab support karna tha।
+
+Isliye Java ne **Unicode** adopt kiya — jisme **65,536 characters** fit hote hain! Aur itne characters ke liye **2 bytes** chahiye।
+
+```java
+char hindi = 'अ';   // Java mein possible hai!
+char c = 'A';
+```
+
+> **Key insight:** Ye Java ki global thinking hai — sirf English nahi, poori duniya ke characters support karo! 🌍
+
+---
+
+## 4. Boolean
+
+```java
+boolean isPass = true;
+boolean isRaining = false;
+```
+
+- Sirf **2 values** — `true` ya `false`
+- Conditions aur decisions ke liye use hota hai
+- Size technically 1 bit — but JVM internally 1 byte use karta hai
+
+---
+
+## Special Literals — Octal aur Hexadecimal
+
+Ye ek **interesting cheez** hai — numbers sirf decimal mein nahi likhe jaate!
+
+### Octal (Base 8) — `0` se shuru karo
+
+```java
+int octal = 0123;  // pehle 0 lagao
+```
+
+- `0` prefix = Java samjhega ye **octal number** hai
+- `0123` octal = `83` decimal
+
+**Kab use hota hai?** File permissions (Linux), low-level programming mein।
+
+### Hexadecimal (Base 16) — `0X` se shuru karo
+
+```java
+int hex = 0X1F;   // pehle 0X lagao
+```
+
+- `0X` prefix = Java samjhega ye **hexadecimal** hai
+- `0X1F` = `31` decimal
+- Digits: 0-9 aur A-F (A=10, B=11... F=15)
+
+**Kab use hota hai?** Colors (RGB codes), memory addresses, networking mein।
+
+```
+Normal:  int a = 255;     // decimal
+Octal:   int b = 0377;    // 0 se shuru
+Hexa:    int c = 0XFF;    // 0X se shuru
+// teeno same value store karte hain — 255!
+```
+
+---
+
+## Poora Picture Ek Saath
+
+```
+Java Data Types
+│
+├── int (4 types)
+│   ├── byte  → 1 byte
+│   ├── short → 2 bytes
+│   ├── int   → 4 bytes ← most common
+│   └── long  → 8 bytes
+│
+├── float (2 types)
+│   ├── float  → 4 bytes (single precision)
+│   └── double → 8 bytes (double precision) ← more accurate
+│
+├── char
+│   └── 2 bytes ← Unicode (C/C++ se alag!)
+│
+└── boolean
+    └── true / false only
+```
+
+---
+
+## Quick Revision Table
+
+| Sawaal | Jawab |
+|--------|-------|
+| Variable kya hai? | Named memory box |
+| Literal kya hai? | Directly likhi fixed value |
+| Comment compiler padhta hai? | Nahi — ignore karta hai |
+| Int ke kitne types? | 4 — byte, short, int, long |
+| Float ke kitne types? | 2 — float, double |
+| Char Java mein kitne bytes? | 2 bytes (Unicode) |
+| C/C++ mein char kitne bytes? | 1 byte (ASCII) |
+| Octal likhne ka prefix? | 0 (zero) |
+| Hex likhne ka prefix? | 0X |
+| Boolean ki values? | true / false |
+
+---
+
+## Ek Line Mein Poora Concept
+
+> **Data type batata hai — kitni memory chahiye aur kis type ka data — variable us memory ka naam hai — aur literal wo actual value hai jo usme store hoti hai!** 🔥
+
+---
+
+*Day 04 → Operators in Java* 🚀
+
+---
+
+GitHub update karo aur LinkedIn post chahiye toh bol do! 🔥
